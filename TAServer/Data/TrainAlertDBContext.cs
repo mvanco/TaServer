@@ -4,14 +4,11 @@ using TAServer.Models;
 
 namespace sfx.Data
 {
-    public partial class TaDbContext : DbContext
+    public partial class TrainAlertDBContext : DbContext
     {
         public virtual DbSet<Location> Location { get; set; }
-      
 
-
-        public TaDbContext(DbContextOptions<TaDbContext> options):base(options){
-        }
+        public TrainAlertDBContext(DbContextOptions<TrainAlertDBContext> options):base(options){}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,13 +18,13 @@ namespace sfx.Data
             {
                 entity.ToTable("location");
 
-                entity.Property(l => l.Id)
+                entity.Property(l => l.id)
                     .HasColumnName("id");
 
-                entity.Property(l => l.Longitude)
+                entity.Property(l => l.longitude)
                     .HasColumnName("longitude");
 
-                entity.Property(l => l.Latitude)
+                entity.Property(l => l.latitude)
                     .HasColumnName("latitude");
 
             });

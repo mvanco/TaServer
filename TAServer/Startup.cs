@@ -24,7 +24,7 @@ namespace TAServer
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<TaDbContext>(options =>
+            services.AddDbContext<TrainAlertDBContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
 

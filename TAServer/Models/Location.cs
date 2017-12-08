@@ -7,11 +7,8 @@ namespace TAServer.Models
 {
     public class Location
     {
-        public int Id { set; get; }
-        public double Latitude { set; get; }
-        public double Longitude { set; get; }
-
+        public int id { get; set; }
+        public double latitude { get; set; }
+        public double longitude { get; set; }
     }
-
-
 }
