@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using sfx.Data;
+using TAServer.Models;
 
 namespace TAServer.Controllers
 {
@@ -49,5 +51,10 @@ namespace TAServer.Controllers
             return Json(location);
         }
 
+        [HttpGet]
+        public IActionResult GetPOIs()
+        {            
+            return Json(_context.POI.ToArray());
+        }
     }
 }
