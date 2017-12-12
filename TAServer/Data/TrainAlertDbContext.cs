@@ -4,12 +4,12 @@ using TAServer.Models;
 
 namespace sfx.Data
 {
-    public partial class TrainAlertDBContext : DbContext
+    public partial class TrainAlertDbContext : DbContext
     {
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<POI> POIs { get; set; }
 
-        public TrainAlertDBContext(DbContextOptions<TrainAlertDBContext> options):base(options){}
+        public TrainAlertDbContext(DbContextOptions<TrainAlertDbContext> options):base(options){}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

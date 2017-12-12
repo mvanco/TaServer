@@ -1,6 +1,7 @@
-﻿﻿using System.Linq;
- using Microsoft.AspNetCore.Mvc;
- using sfx.Data;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using sfx.Data;
+using TAServer.Models;
 
 namespace TAServer.Controllers
 {
@@ -9,30 +10,41 @@ namespace TAServer.Controllers
     {
         private static int LocationIterator = 1; // TODO: remove this (SimulatedRepository)
         private static bool ToTheLeftDirection = true; // TODO: remove this (SimulatedRepository)
-        private readonly TrainAlertDBContext Context;
+        private readonly TrainAlertDbContext Context;
 
-        public TrainAlertController(TrainAlertDBContext context)
+        public TrainAlertController(TrainAlertDbContext context)
         {
             Context = context;
         }
 
         [HttpGet]
-        public IActionResult GetLocation() {
-            
-            var location = Context.Locations.FirstOrDefault(location1 => location1.Id == LocationIterator); // TODO: remove this (SimulatedRepository)
+        public IActionResult GetLocation()
+        {
+            var location =
+                Context.Locations.FirstOrDefault(location1 =>
+                    location1.Id == LocationIterator); // TODO: remove this (SimulatedRepository)
 //            var location = _context.Location.OrderByDescending(l => l.id).FirstOrDefault(); // TODO: uncomment this
-            
-            if (ToTheLeftDirection) {
-                if (LocationIterator < 232) {
+
+            if (ToTheLeftDirection)
+            {
+                if (LocationIterator < 232)
+                {
                     LocationIterator++;
-                } else {
+                }
+                else
+                {
                     ToTheLeftDirection = false;
                     LocationIterator--;
                 }
-            } else {
-                if (LocationIterator > 2) {
+            }
+            else
+            {
+                if (LocationIterator > 2)
+                {
                     LocationIterator--;
-                } else {
+                }
+                else
+                {
                     ToTheLeftDirection = true;
                     LocationIterator++;
                 }
@@ -43,8 +55,8 @@ namespace TAServer.Controllers
 
         [HttpGet]
         public IActionResult GetPOIs()
-        {            
-            return Json(Context.POIs.ToArray());
+        {
+            return Json(new PoisApi(Context.POIs.ToArray()));
         }
     }
 }
