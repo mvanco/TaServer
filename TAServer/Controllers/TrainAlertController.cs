@@ -1,52 +1,42 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using sfx.Data;
-using TAServer.Models;
+﻿﻿using System.Linq;
+ using Microsoft.AspNetCore.Mvc;
+ using sfx.Data;
 
 namespace TAServer.Controllers
 {
     [Produces("application/json")]
     public class TrainAlertController : Controller
     {
-
-        private static int sLocationIterator = 1; // TODO: remove this (SimulatedRepository)
-        private static bool toTheLeftDirection = true; // TODO: remove this (SimulatedRepository)
-        
-
-        private readonly TrainAlertDBContext _context;
+        private static int LocationIterator = 1; // TODO: remove this (SimulatedRepository)
+        private static bool ToTheLeftDirection = true; // TODO: remove this (SimulatedRepository)
+        private readonly TrainAlertDBContext Context;
 
         public TrainAlertController(TrainAlertDBContext context)
         {
-            _context = context;
+            Context = context;
         }
 
         [HttpGet]
         public IActionResult GetLocation() {
             
-            // TODO: remove this (SimulatedRepository)
-            var location = _context.Location.FirstOrDefault(location1 => location1.id == sLocationIterator);
-            if (toTheLeftDirection) {
-                if (sLocationIterator < 232) {
-                    sLocationIterator++;
+            var location = Context.Locations.FirstOrDefault(location1 => location1.Id == LocationIterator); // TODO: remove this (SimulatedRepository)
+//            var location = _context.Location.OrderByDescending(l => l.id).FirstOrDefault(); // TODO: uncomment this
+            
+            if (ToTheLeftDirection) {
+                if (LocationIterator < 232) {
+                    LocationIterator++;
                 } else {
-                    toTheLeftDirection = false;
-                    sLocationIterator--;
+                    ToTheLeftDirection = false;
+                    LocationIterator--;
                 }
             } else {
-                if (sLocationIterator > 2) {
-                    sLocationIterator--;
+                if (LocationIterator > 2) {
+                    LocationIterator--;
                 } else {
-                    toTheLeftDirection = true;
-                    sLocationIterator++;
+                    ToTheLeftDirection = true;
+                    LocationIterator++;
                 }
             }
-            
-//            var location = _context.Location.OrderByDescending(l => l.id).FirstOrDefault(); // TODO: uncomment this
 
             return Json(location);
         }
@@ -54,7 +44,7 @@ namespace TAServer.Controllers
         [HttpGet]
         public IActionResult GetPOIs()
         {            
-            return Json(_context.POI.ToArray());
+            return Json(Context.POIs.ToArray());
         }
     }
 }

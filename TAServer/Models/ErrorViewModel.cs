@@ -1,5 +1,3 @@
-using System;
-
 namespace TAServer.Models
 {
     public class ErrorViewModel

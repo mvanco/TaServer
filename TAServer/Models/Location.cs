@@ -2,8 +2,8 @@
 {
     public class Location
     {
-        public int id { get; set; }
-        public double latitude { get; set; }
-        public double longitude { get; set; }
+        public int Id { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 }
