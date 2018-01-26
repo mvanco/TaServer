@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using TAServer.Models;
+using TaServer.Models;
 
 namespace sfx.Data
 {
     public partial class TrainAlertDbContext : DbContext
     {
         public virtual DbSet<Location> Locations { get; set; }
-        public virtual DbSet<POI> POIs { get; set; }
+        public virtual DbSet<Poi> Pois { get; set; }
 
         public TrainAlertDbContext(DbContextOptions<TrainAlertDbContext> options):base(options){}
 
@@ -29,7 +29,7 @@ namespace sfx.Data
                     .HasColumnName("latitude");
             });
 
-            modelBuilder.Entity<POI>(entity =>
+            modelBuilder.Entity<Poi>(entity =>
             {
                 entity.ToTable("poi");
 

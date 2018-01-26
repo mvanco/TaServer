@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using sfx.Data;
 
-namespace TAServer
+namespace TaServer
 {
     public class Startup
     {

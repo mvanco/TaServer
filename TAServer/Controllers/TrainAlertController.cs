@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using sfx.Data;
-using TAServer.Models;
+using TaServer.Models;
 
-namespace TAServer.Controllers
+namespace TaServer.Controllers
 {
     [Produces("application/json")]
     public class TrainAlertController : Controller
@@ -23,7 +23,7 @@ namespace TAServer.Controllers
             var location =
                 Context.Locations.FirstOrDefault(location1 =>
                     location1.Id == LocationIterator); // TODO: remove this (SimulatedRepository)
-//            var location = _context.Location.OrderByDescending(l => l.id).FirstOrDefault(); // TODO: uncomment this
+                                                       //            var location = _context.Location.OrderByDescending(l => l.id).FirstOrDefault(); // TODO: uncomment this
 
             if (ToTheLeftDirection)
             {
@@ -39,7 +39,7 @@ namespace TAServer.Controllers
             }
             else
             {
-                if (LocationIterator > 2)
+                if (LocationIterator > 1)
                 {
                     LocationIterator--;
                 }
@@ -54,9 +54,42 @@ namespace TAServer.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetPOIs()
+        public IActionResult GetPois()
         {
-            return Json(new PoisApi(Context.POIs.ToArray()));
+            return Json(new Pois(Context.Pois.ToArray()));
+        }
+
+        [HttpPost]
+        public IActionResult AddPoi([FromBody] Poi poi)
+        {
+            foreach (Poi p in Context.Pois) {
+                if (p.Title.Equals(poi.Title))
+                {
+                    return null;
+                }
+            }
+
+            Context.Pois.Add(poi);
+            Context.SaveChanges();
+            return Json(poi);
+        }
+
+        [HttpPut]
+        public IActionResult EditPoi(long id, [FromBody] Poi poi)
+        {
+            var newPoi = Context.Pois.FirstOrDefault(t => t.Id == id);
+            if (newPoi == null)
+            {
+                return null;
+            }
+
+            newPoi.Title = poi.Title;
+            newPoi.Latitude = poi.Latitude;
+            newPoi.Longitude = poi.Longitude;
+            newPoi.Type = poi.Type;
+            Context.Pois.Update(newPoi);
+            Context.SaveChanges();
+            return Json(newPoi);
         }
     }
 }

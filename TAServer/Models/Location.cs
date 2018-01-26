@@ -1,4 +1,4 @@
-﻿namespace TAServer.Models
+﻿namespace TaServer.Models
 {
     public class Location
     {
