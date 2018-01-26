@@ -13,7 +13,7 @@ namespace TaServer
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://192.168.16.29:5000")
+                .UseUrls("http://*:5000")
                 .Build();
     }
 }

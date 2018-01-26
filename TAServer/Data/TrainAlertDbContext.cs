@@ -27,6 +27,9 @@ namespace sfx.Data
 
                 entity.Property(l => l.Latitude)
                     .HasColumnName("latitude");
+
+                entity.Property(l => l.Time)
+                    .HasColumnName("time");
             });
 
             modelBuilder.Entity<Poi>(entity =>
